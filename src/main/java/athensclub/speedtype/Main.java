@@ -22,9 +22,10 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         MainView mainView = new MainView();
+        mainView.getController().addHandlerToStage(primaryStage);
         Scene scene = new Scene(mainView);
         primaryStage.setTitle("Typing Speed test");
         primaryStage.setScene(scene);
-        primaryStage.show();
+        primaryStage.show();;
     }
 }

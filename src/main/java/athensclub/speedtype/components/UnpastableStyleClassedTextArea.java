@@ -10,4 +10,5 @@ public class UnpastableStyleClassedTextArea extends StyleClassedTextArea {
     @Override
     public void paste() {
     }
+
 }

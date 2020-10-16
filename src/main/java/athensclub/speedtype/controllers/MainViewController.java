@@ -14,6 +14,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import org.fxmisc.richtext.StyleClassedTextArea;
 
 import java.net.URL;
@@ -154,6 +156,13 @@ public class MainViewController implements Initializable {
             }
 
 
+        });
+    }
+
+    public void addHandlerToStage(Stage stage){
+        stage.addEventHandler(WindowEvent.WINDOW_CLOSE_REQUEST, e -> {
+            timer.cancel();
+            System.exit(0);
         });
     }
 
