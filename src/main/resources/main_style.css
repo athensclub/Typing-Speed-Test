@@ -1,0 +1,33 @@
+.styled-text-area {
+    -fx-background-color: #2b2b2b;
+    -fx-font-family: 'roboto';
+    -fx-font-size: 28;
+}
+
+.styled-text-area .caret {
+    -fx-stroke: white;
+}
+
+.styled-text-area .text {
+    -fx-fill: white;
+}
+
+.styled-text-area .current-word {
+    -rtfx-background-color: #3498db;
+}
+
+.styled-text-area .green-text{
+    -fx-fill:#2ecc71;
+}
+
+.styled-text-area .red-text {
+    -fx-fill: #e74c3c;
+}
+
+.root {
+    -fx-background-color: #3c3f41;
+}
+
+.button {
+    -fx-background-color: black;
+}
