@@ -116,8 +116,18 @@ public class MainViewController implements Initializable {
             }
         });
 
+        currentWord.addListener((prop, old, val) -> {
+            // the value is null when resetting because the current would be clear and the
+            // current word binding would be out of bound, becoming null.
+            if (old == null)
+                highlightCurrentWord(); // highlight from reset
+            else if(val == null)
+                Platform.runLater(() ->
+                        displayText.clearStyle(0, displayText.getText().length())); // clear on reset
+        });
+
         inputText.textProperty().addListener((prop, old, val) -> {
-            if(inputText.isDisabled())
+            if (inputText.isDisabled())
                 return; // don't check correctness when the text is 'Press restart to try again'
 
             if (!over && currentTimer == null) {
@@ -159,7 +169,7 @@ public class MainViewController implements Initializable {
         });
     }
 
-    public void addHandlerToStage(Stage stage){
+    public void addHandlerToStage(Stage stage) {
         stage.addEventHandler(WindowEvent.WINDOW_CLOSE_REQUEST, e -> {
             timer.cancel();
             System.exit(0);
@@ -218,12 +228,13 @@ public class MainViewController implements Initializable {
                 Platform.runLater(() ->
                         displayText.setStyle(idx + temp, idx + temp + 1, List.of("current-word", "red-text")));
         }
-        if (input.length() < correct.length())
+        if (input.length() < correct.length()) {
             Platform.runLater(() ->
                     displayText.setStyle(idx + input.length(), idx + correct.length(), List.of("current-word")));
-        else if (input.length() > correct.length())
+        } else if (input.length() > correct.length()) {
             Platform.runLater(() ->
                     displayText.setStyle(idx, idx + correct.length(), List.of("current-word", "red-text")));
+        }
         Platform.runLater(() -> {
             displayText.displaceCaret(idx);
             displayText.requestFollowCaret();
@@ -283,18 +294,19 @@ public class MainViewController implements Initializable {
         if (currentTimer != null)
             currentTimer.cancel();
         currentTimer = null;
+        timeTakenOnLastWord.set(0);
+        correctCharacters.set(0);
+        currentWordIndex.set(0);
+        remainingTime.set(60);
+
         Platform.runLater(() -> {
             inputText.clear();
-            timeTakenOnLastWord.set(0);
-            correctCharacters.set(0);
-            currentWordIndex.set(0);
             current.clear();
             current.addAll(randomWords);
             displayText.replace(0, displayText.getText().length(), String.join(" ", current), "");
             inputText.setDisable(false);
-            remainingTime.set(60);
-            highlightCurrentWord();
         });
+
     }
 
 }
