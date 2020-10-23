@@ -122,8 +122,12 @@ public class MainViewController implements Initializable {
             if (old == null)
                 highlightCurrentWord(); // highlight from reset
             else if(val == null)
-                Platform.runLater(() ->
-                        displayText.clearStyle(0, displayText.getText().length())); // clear on reset
+                Platform.runLater(() -> {
+                    displayText.clearStyle(0, displayText.getText().length()); // clear on reset
+                    if (currentTimer != null)
+                        currentTimer.cancel();
+                    currentTimer = null;
+                });
         });
 
         inputText.textProperty().addListener((prop, old, val) -> {
@@ -291,9 +295,6 @@ public class MainViewController implements Initializable {
                 .collect(Collectors.toList());
         typed.clear();
         over = false;
-        if (currentTimer != null)
-            currentTimer.cancel();
-        currentTimer = null;
         timeTakenOnLastWord.set(0);
         correctCharacters.set(0);
         currentWordIndex.set(0);
@@ -303,6 +304,11 @@ public class MainViewController implements Initializable {
             inputText.clear();
             current.clear();
             current.addAll(randomWords);
+            // change display text after input text so that when the
+            // current word change is the last event that happen,
+            // causing event handler to do all the reset stuff that
+            // the input text handler would otherwise incorrectly
+            // detect as user input.
             displayText.replace(0, displayText.getText().length(), String.join(" ", current), "");
             inputText.setDisable(false);
         });
