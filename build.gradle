@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'athensclub.speedtype'
-version '1.0.0'
+version '1.0.3'
 mainClassName = 'athensclub.speedtype.Main'
 
 repositories {
@@ -27,8 +27,15 @@ javafx {
 jlink {
     options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
     launcher {
-        name = 'Typing Speed Test - Athensclub'
+        name = 'Typing Speed Test'
         noConsole = true
     }
+
     addExtraDependencies("javafx")
+
+    jpackage { // windows only
+        icon = "src/main/resources/keyboard_icon.ico"
+        installerOptions += ['--win-per-user-install', '--win-dir-chooser', '--win-menu',
+                             '--app-version', version]
+    }
 }
