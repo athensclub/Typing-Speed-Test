@@ -3,6 +3,7 @@ package athensclub.speedtype;
 import athensclub.speedtype.components.MainView;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -24,7 +25,8 @@ public class Main extends Application {
         MainView mainView = new MainView();
         mainView.getController().addHandlerToStage(primaryStage);
         Scene scene = new Scene(mainView);
-        primaryStage.setTitle("Typing Speed test");
+        primaryStage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("keyboard_icon.png")));
+        primaryStage.setTitle("Typing Speed Test");
         primaryStage.setScene(scene);
         primaryStage.show();;
     }

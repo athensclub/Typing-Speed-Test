@@ -121,7 +121,7 @@ public class MainViewController implements Initializable {
             // current word binding would be out of bound, becoming null.
             if (old == null)
                 highlightCurrentWord(); // highlight from reset
-            else if(val == null)
+            else if (val == null)
                 Platform.runLater(() -> {
                     displayText.clearStyle(0, displayText.getText().length()); // clear on reset
                     if (currentTimer != null)
