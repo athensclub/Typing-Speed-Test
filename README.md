@@ -3,8 +3,6 @@ A simple JavaFX application for testing typing speed. This project uses 1000 mos
 
 ## Releases
 The latest release is available on this repository's [releases](https://github.com/athensclub/Typing-Speed-Test/releases "releases page") page.
-### Installation
-First download the files in the release page, then the files in release page is a jlink image and can be run by running `bin/Typing Speed Test.bat`
 
 ## Authors
 The only author of this project is [athensclub](https://github.com/athensclub "athensclub") (me!)
